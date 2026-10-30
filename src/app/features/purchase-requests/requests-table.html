@@ -1,0 +1,39 @@
+<div class="table-scroll">
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Solicitação</th>
+        <th scope="col">Solicitante</th>
+        <th scope="col">Data</th>
+        <th scope="col">Valor estimado</th>
+        <th scope="col">Status</th>
+        <th scope="col" class="actions-header">Ações</th>
+      </tr>
+    </thead>
+    <tbody>
+      @for (request of requests(); track request.id) {
+        <tr>
+          <td>
+            <button type="button" class="title-cell" (click)="dialogs.openDetails(request)">
+              <span class="file-icon"><app-icon name="file-text" [size]="17" /></span>
+              <span>
+                <strong>{{ request.title }}</strong>
+                <small>#{{ request.id.slice(0, 8).toUpperCase() }}</small>
+              </span>
+            </button>
+          </td>
+          <td>
+            <span class="requester">
+              <app-avatar [name]="request.requester.name" size="sm" />
+              {{ request.requester.name }}
+            </span>
+          </td>
+          <td class="muted">{{ request.createdAt | shortDate }}</td>
+          <td class="amount">{{ request.estimatedAmount | brl }}</td>
+          <td><app-status-badge [status]="request.status" /></td>
+          <td><app-request-actions [request]="request" /></td>
+        </tr>
+      }
+    </tbody>
+  </table>
+</div>

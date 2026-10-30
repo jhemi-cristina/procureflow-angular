@@ -1,0 +1,39 @@
+<app-modal
+  [title]="isEditing() ? 'Editar rascunho' : 'Nova solicitação de compra'"
+  description="Salve como rascunho para revisar depois ou envie direto para aprovação."
+  (closed)="closed.emit()"
+>
+  <form novalidate (submit)="save(false, $event)">
+    <app-text-field
+      label="Título"
+      placeholder="Ex.: Notebooks para o time de produto"
+      autofocus
+      [error]="errors().title"
+      [(value)]="title"
+    />
+    <app-text-field
+      label="Valor estimado (R$)"
+      placeholder="0,00"
+      inputmode="decimal"
+      [error]="errors().estimatedAmount"
+      [(value)]="estimatedAmount"
+    />
+    <app-text-field
+      label="Descrição"
+      placeholder="Detalhe o que será comprado e a justificativa (opcional)"
+      multiline
+      [error]="errors().description"
+      [(value)]="description"
+    />
+  </form>
+
+  <button appButton modal-footer variant="secondary" [disabled]="saving()" (click)="save(false)">
+    Salvar rascunho
+  </button>
+  <button appButton modal-footer [loading]="saving()" (click)="save(true)">
+    @if (!saving()) {
+      <app-icon name="send" [size]="15" />
+    }
+    Salvar e enviar
+  </button>
+</app-modal>

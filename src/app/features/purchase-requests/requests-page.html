@@ -1,0 +1,74 @@
+<app-page-header
+  eyebrow="Compras"
+  title="Solicitações"
+  description="Crie, acompanhe e envie suas solicitações de compra para aprovação."
+>
+  <button appButton (click)="dialogs.openCreate()">
+    <app-icon name="plus" [size]="18" [strokeWidth]="2.4" />
+    Nova solicitação
+  </button>
+</app-page-header>
+
+<app-panel flush>
+  <app-panel-header
+    title="Todas as solicitações"
+    description="Clique em uma solicitação para ver os detalhes."
+  />
+
+  <div class="toolbar">
+    <div class="tabs" role="group" aria-label="Filtrar por status">
+      @for (filter of filters; track filter) {
+        <button
+          type="button"
+          [class.tab-active]="status() === filter"
+          [attr.aria-pressed]="status() === filter"
+          (click)="changeStatus(filter)"
+        >
+          {{ filterLabel(filter) }}
+          <span>{{ countByStatus()[filter] ?? 0 }}</span>
+        </button>
+      }
+    </div>
+
+    <label class="search">
+      <app-icon name="search" [size]="16" />
+      <input
+        type="search"
+        placeholder="Buscar por título, descrição ou ID..."
+        aria-label="Buscar solicitações"
+        [value]="search()"
+        (input)="changeSearch($event)"
+      />
+    </label>
+  </div>
+
+  @if (query.isPending()) {
+    <app-loading-state label="Carregando solicitações..." />
+  } @else if (query.isError()) {
+    <app-error-state [message]="errorMessage()" (retry)="query.refetch()" />
+  } @else if (requests().length === 0) {
+    <app-empty-state
+      title="Nenhuma solicitação ainda"
+      description="Crie sua primeira solicitação de compra para começar."
+    >
+      <button appButton size="sm" (click)="dialogs.openCreate()">
+        <app-icon name="plus" [size]="15" /> Nova solicitação
+      </button>
+    </app-empty-state>
+  } @else if (filtered().length === 0) {
+    <app-empty-state
+      icon="search-x"
+      title="Nenhum resultado"
+      description="Ajuste a busca ou o filtro de status."
+    />
+  } @else {
+    <app-requests-table [requests]="pageItems()" />
+    <footer class="footer">
+      <span>
+        Mostrando <strong>{{ rangeStart() }}</strong>–<strong>{{ rangeEnd() }}</strong> de
+        <strong>{{ filtered().length }}</strong> solicitações
+      </span>
+      <app-pagination [page]="page()" [pageCount]="pageCount()" (pageChange)="setPage($event)" />
+    </footer>
+  }
+</app-panel>

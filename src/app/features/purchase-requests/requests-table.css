@@ -1,0 +1,118 @@
+:host {
+  display: block;
+}
+
+.table-scroll {
+  width: 100%;
+  overflow-x: auto;
+}
+
+.table {
+  width: 100%;
+  min-width: 820px;
+  border-collapse: collapse;
+  text-align: left;
+  white-space: nowrap;
+}
+
+.table thead {
+  background: var(--surface-muted);
+}
+
+.table th {
+  padding: 12px 18px;
+  color: #929bad;
+  font-size: 11px;
+  font-weight: 600;
+  border-top: 1px solid var(--border-soft);
+  border-bottom: 1px solid var(--border-soft);
+}
+
+.table td {
+  padding: 13px 18px;
+  font-size: 12px;
+  border-bottom: 1px solid var(--border-soft);
+}
+
+.table tbody tr:last-child td {
+  border-bottom: 0;
+}
+
+.table tbody tr {
+  transition: background 0.15s;
+}
+
+.table tbody tr:hover {
+  background: #fcfcff;
+}
+
+.actions-header {
+  text-align: right;
+}
+
+.title-cell {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 0;
+  text-align: left;
+  background: transparent;
+  border: 0;
+}
+
+.title-cell > span:last-child {
+  display: flex;
+  max-width: 280px;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.title-cell strong {
+  overflow: hidden;
+  font-size: 12px;
+  text-overflow: ellipsis;
+}
+
+.title-cell:hover strong {
+  color: var(--primary-text);
+}
+
+.title-cell small {
+  color: #929bad;
+  font-size: 10px;
+  letter-spacing: 0.3px;
+}
+
+.file-icon {
+  display: grid;
+  width: 35px;
+  height: 35px;
+  flex-shrink: 0;
+  place-items: center;
+  color: #6558e8;
+  background: var(--primary-soft);
+  border-radius: 9px;
+}
+
+.requester {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 500;
+}
+
+.muted {
+  color: var(--muted);
+}
+
+.amount {
+  font-weight: 700;
+}
+
+@media (max-width: 1400px) {
+  .table th,
+  .table td {
+    padding-right: 12px;
+    padding-left: 12px;
+  }
+}
