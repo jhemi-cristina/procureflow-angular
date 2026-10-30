@@ -1,0 +1,105 @@
+.dialog {
+  width: calc(100% - 32px);
+  max-height: calc(100dvh - 48px);
+  margin: auto;
+  padding: 0;
+  color: var(--foreground);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  box-shadow: var(--shadow-lg);
+}
+
+.dialog::backdrop {
+  background: #10182866;
+  backdrop-filter: blur(2px);
+}
+
+.dialog[open] {
+  animation: pop-in 0.18s ease-out;
+}
+
+.sm {
+  max-width: 440px;
+}
+
+.md {
+  max-width: 560px;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+}
+
+.header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 22px 22px 0;
+}
+
+.header h2 {
+  margin: 0;
+  font-family: var(--font-heading);
+  font-size: 17px;
+  font-weight: 800;
+  letter-spacing: -0.3px;
+}
+
+.header p {
+  margin: 6px 0 0;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.55;
+}
+
+.close {
+  display: grid;
+  width: 32px;
+  height: 32px;
+  flex-shrink: 0;
+  place-items: center;
+  color: var(--muted);
+  background: transparent;
+  border: 0;
+  border-radius: var(--radius-sm);
+}
+
+.close:hover {
+  color: var(--foreground);
+  background: var(--surface-muted);
+}
+
+.body {
+  padding: 20px 22px;
+}
+
+.footer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 10px;
+  padding: 16px 22px;
+  background: var(--surface-muted);
+  border-top: 1px solid var(--border-soft);
+  border-radius: 0 0 16px 16px;
+}
+
+.footer:empty {
+  display: none;
+}
+
+@keyframes pop-in {
+  from {
+    opacity: 0;
+    transform: translateY(6px) scale(0.98);
+  }
+}
+
+@media (max-width: 480px) {
+  .footer > ::ng-deep * {
+    flex: 1;
+  }
+}

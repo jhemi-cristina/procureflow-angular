@@ -1,0 +1,43 @@
+<label class="label" [for]="id">{{ label() }}</label>
+
+<div class="control" [class]="size()" [class.invalid]="!!error()">
+  @if (icon(); as icon) {
+    <app-icon class="icon" [name]="icon" [size]="18" />
+  }
+
+  @if (multiline()) {
+    <textarea
+      #control
+      [id]="id"
+      [rows]="rows()"
+      [placeholder]="placeholder()"
+      [value]="value()"
+      [attr.maxlength]="maxlength() ?? null"
+      [attr.aria-invalid]="!!error()"
+      [attr.aria-describedby]="describedBy()"
+      (input)="onInput($event)"
+    ></textarea>
+  } @else {
+    <input
+      #control
+      [id]="id"
+      [type]="type()"
+      [placeholder]="placeholder()"
+      [value]="value()"
+      [attr.autocomplete]="autocomplete() ?? null"
+      [attr.inputmode]="inputmode() ?? null"
+      [attr.maxlength]="maxlength() ?? null"
+      [attr.aria-invalid]="!!error()"
+      [attr.aria-describedby]="describedBy()"
+      (input)="onInput($event)"
+    />
+  }
+
+  <ng-content select="[trailing]" />
+</div>
+
+@if (error()) {
+  <p [id]="id + '-error'" class="error" role="alert">{{ error() }}</p>
+} @else if (hint()) {
+  <p [id]="id + '-hint'" class="hint">{{ hint() }}</p>
+}
