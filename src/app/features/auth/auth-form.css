@@ -1,0 +1,45 @@
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.toggle-password {
+  display: grid;
+  width: 32px;
+  height: 32px;
+  flex-shrink: 0;
+  place-items: center;
+  margin-right: -6px;
+  color: var(--muted-light);
+  background: transparent;
+  border: 0;
+  border-radius: var(--radius-sm);
+}
+
+.toggle-password:hover {
+  color: var(--primary);
+  background: var(--primary-softer);
+}
+
+.form-error {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  margin: 0;
+  padding: 11px 12px;
+  color: #b42332;
+  font-size: 13px;
+  line-height: 1.5;
+  background: var(--danger-soft);
+  border: 1px solid #ffd7dc;
+  border-radius: var(--radius-sm);
+}
+
+.form-error app-icon {
+  margin-top: 2px;
+}
+
+.submit {
+  margin-top: 6px;
+}

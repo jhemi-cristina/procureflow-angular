@@ -1,0 +1,55 @@
+<main class="page">
+  <aside class="showcase" aria-hidden="true">
+    <div class="brand">
+      <span class="brand-mark"><app-icon name="shopping-cart" [size]="22" [strokeWidth]="2.4" /></span>
+      <span class="brand-name">procureflow</span>
+    </div>
+
+    <div class="showcase-copy">
+      <h2>Compras corporativas sem planilhas e sem e-mails perdidos.</h2>
+      <ul>
+        @for (highlight of highlights; track highlight.text) {
+          <li>
+            <span><app-icon [name]="highlight.icon" [size]="17" /></span>
+            {{ highlight.text }}
+          </li>
+        }
+      </ul>
+    </div>
+
+    <div class="preview-card">
+      <div class="preview-icon"><app-icon name="trending-up" [size]="18" /></div>
+      <div>
+        <span>Taxa de aprovação</span>
+        <strong>92%</strong>
+      </div>
+      <div class="preview-bars">
+        @for (height of bars; track $index) {
+          <i [style.height.%]="height"></i>
+        }
+      </div>
+    </div>
+  </aside>
+
+  <section class="form-side">
+    <div class="card">
+      <div class="brand mobile-brand">
+        <span class="brand-mark"><app-icon name="shopping-cart" [size]="22" [strokeWidth]="2.4" /></span>
+        <span class="brand-name">procureflow</span>
+      </div>
+
+      <header class="heading">
+        <h1>{{ title() }}</h1>
+        <p>{{ description() }}</p>
+      </header>
+
+      <ng-content />
+
+      <p class="switch-prompt">
+        {{ switchPrompt() }} <a [routerLink]="switchLink()">{{ switchLabel() }}</a>
+      </p>
+
+      <p class="footer">© 2026 ProcureFlow. Todos os direitos reservados.</p>
+    </div>
+  </section>
+</main>

@@ -1,0 +1,265 @@
+.page {
+  display: grid;
+  min-height: 100vh;
+  grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr);
+  background: var(--surface);
+}
+
+.showcase {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 40px;
+  padding: 44px 52px;
+  overflow: hidden;
+  color: #fff;
+  background:
+    radial-gradient(circle at 85% 10%, #8b7ffb66, transparent 40%),
+    radial-gradient(circle at 10% 95%, #3a2fc566, transparent 45%),
+    linear-gradient(150deg, #5d50ee, #3f33cf);
+}
+
+.showcase::after {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(#ffffff0d 1px, transparent 1px),
+    linear-gradient(90deg, #ffffff0d 1px, transparent 1px);
+  background-size: 44px 44px;
+  content: '';
+  mask-image: linear-gradient(to bottom, #000, transparent 85%);
+  pointer-events: none;
+}
+
+.showcase > * {
+  position: relative;
+  z-index: 1;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+}
+
+.brand-mark {
+  display: grid;
+  width: 42px;
+  height: 42px;
+  place-items: center;
+  color: #fff;
+  background: #ffffff26;
+  border: 1px solid #ffffff33;
+  border-radius: 12px;
+}
+
+.brand-name {
+  font-family: var(--font-heading);
+  font-size: 21px;
+  font-weight: 800;
+  letter-spacing: -0.8px;
+}
+
+.showcase-copy {
+  max-width: 470px;
+}
+
+.showcase-copy h2 {
+  margin: 0 0 28px;
+  font-family: var(--font-heading);
+  font-size: clamp(26px, 2.6vw, 36px);
+  font-weight: 800;
+  letter-spacing: -1.2px;
+  line-height: 1.2;
+}
+
+.showcase-copy ul {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.showcase-copy li {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: #e6e3ff;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.showcase-copy li span {
+  display: grid;
+  width: 34px;
+  height: 34px;
+  flex-shrink: 0;
+  place-items: center;
+  background: #ffffff1f;
+  border-radius: 10px;
+}
+
+.preview-card {
+  display: flex;
+  max-width: 340px;
+  align-items: center;
+  gap: 14px;
+  padding: 16px 18px;
+  color: var(--foreground);
+  background: #fffffff2;
+  border-radius: 16px;
+  box-shadow: 0 20px 45px #1b145e40;
+}
+
+.preview-icon {
+  display: grid;
+  width: 40px;
+  height: 40px;
+  flex-shrink: 0;
+  place-items: center;
+  color: var(--success);
+  background: var(--success-soft);
+  border-radius: 11px;
+}
+
+.preview-card span {
+  display: block;
+  color: var(--muted);
+  font-size: 11px;
+}
+
+.preview-card strong {
+  font-family: var(--font-heading);
+  font-size: 22px;
+  font-weight: 800;
+}
+
+.preview-bars {
+  display: flex;
+  height: 38px;
+  flex: 1;
+  align-items: flex-end;
+  gap: 4px;
+  margin-left: auto;
+}
+
+.preview-bars i {
+  flex: 1;
+  background: #a49bf8;
+  border-radius: 3px 3px 0 0;
+}
+
+.form-side {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 24px;
+  background:
+    radial-gradient(circle at top right, #5549e80f, transparent 40%),
+    var(--surface);
+}
+
+.card {
+  width: 100%;
+  max-width: 400px;
+}
+
+.mobile-brand {
+  display: none;
+  margin-bottom: 36px;
+  color: var(--foreground);
+}
+
+.mobile-brand .brand-mark {
+  background: linear-gradient(145deg, #7167f5, #4f46e5);
+  border: 0;
+  box-shadow: 0 5px 12px #4f46e526;
+}
+
+.heading {
+  margin-bottom: 30px;
+}
+
+.heading h1 {
+  margin: 0 0 8px;
+  font-family: var(--font-heading);
+  font-size: 28px;
+  font-weight: 800;
+  letter-spacing: -0.9px;
+}
+
+.heading p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.switch-prompt {
+  margin: 24px 0 0;
+  color: var(--muted);
+  font-size: 13px;
+  text-align: center;
+}
+
+.switch-prompt a {
+  color: var(--primary);
+  font-weight: 700;
+}
+
+.switch-prompt a:hover {
+  text-decoration: underline;
+}
+
+.footer {
+  margin: 28px 0 0;
+  color: var(--muted-light);
+  font-size: 12px;
+  text-align: center;
+}
+
+@media (max-width: 960px) {
+  .page {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .showcase {
+    display: none;
+  }
+
+  .mobile-brand {
+    display: flex;
+  }
+
+  .form-side {
+    min-height: 100vh;
+    background:
+      radial-gradient(circle at top left, #5549e81f, transparent 40%),
+      var(--background);
+  }
+
+  .card {
+    padding: 36px 28px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    box-shadow: 0 20px 60px #201e4614;
+  }
+}
+
+@media (max-width: 480px) {
+  .form-side {
+    padding: 24px 16px;
+  }
+
+  .card {
+    padding: 28px 20px;
+  }
+
+  .heading h1 {
+    font-size: 24px;
+  }
+}

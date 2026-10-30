@@ -1,0 +1,74 @@
+<app-auth-layout
+  title="Crie sua conta"
+  description="Cadastre-se para criar e acompanhar suas solicitações de compra."
+  switchPrompt="Já tem uma conta?"
+  switchLabel="Entrar"
+  switchLink="/login"
+>
+  <form novalidate (submit)="submit($event)">
+    <app-text-field
+      label="Nome completo"
+      autocomplete="name"
+      placeholder="Como você quer ser chamado(a)"
+      size="lg"
+      icon="user-round"
+      [error]="errors().name"
+      [(value)]="name"
+    />
+
+    <app-text-field
+      label="E-mail"
+      type="email"
+      autocomplete="email"
+      placeholder="seu@email.com"
+      size="lg"
+      icon="mail"
+      [error]="errors().email"
+      [(value)]="email"
+    />
+
+    <app-text-field
+      label="Senha"
+      autocomplete="new-password"
+      placeholder="Mínimo de 8 caracteres"
+      size="lg"
+      icon="lock-keyhole"
+      [type]="showPassword() ? 'text' : 'password'"
+      [error]="errors().password"
+      [(value)]="password"
+    >
+      <button
+        trailing
+        type="button"
+        class="toggle-password"
+        [attr.aria-label]="showPassword() ? 'Ocultar senha' : 'Mostrar senha'"
+        [attr.aria-pressed]="showPassword()"
+        (click)="showPassword.set(!showPassword())"
+      >
+        <app-icon [name]="showPassword() ? 'eye-off' : 'eye'" [size]="18" />
+      </button>
+    </app-text-field>
+
+    <app-text-field
+      label="Confirmar senha"
+      autocomplete="new-password"
+      placeholder="Repita a senha"
+      size="lg"
+      icon="lock-keyhole"
+      [type]="showPassword() ? 'text' : 'password'"
+      [error]="errors().confirmPassword"
+      [(value)]="confirmPassword"
+    />
+
+    @if (formError()) {
+      <p class="form-error" role="alert">
+        <app-icon name="circle-alert" [size]="16" />
+        {{ formError() }}
+      </p>
+    }
+
+    <button appButton type="submit" size="lg" fullWidth class="submit" [loading]="submitting()">
+      {{ submitting() ? 'Criando conta...' : 'Criar conta' }}
+    </button>
+  </form>
+</app-auth-layout>
