@@ -1,0 +1,64 @@
+@if (!isAdmin()) {
+  <app-panel>
+    <app-empty-state
+      icon="shield-alert"
+      title="Acesso restrito"
+      description="Apenas administradores podem gerenciar usuários."
+    />
+  </app-panel>
+} @else {
+  <app-page-header
+    eyebrow="Administração"
+    title="Usuários"
+    description="Defina quem pode aprovar solicitações e quem administra a plataforma."
+  />
+
+  <app-panel flush>
+    <app-panel-header
+      [title]="headerTitle()"
+      description="Administradores gerenciam usuários; aprovadores decidem solicitações; solicitantes criam pedidos."
+    />
+
+    @if (query.isPending()) {
+      <app-loading-state label="Carregando usuários..." />
+    } @else if (query.isError()) {
+      <app-error-state [message]="errorMessage()" (retry)="query.refetch()" />
+    } @else if (users().length === 0) {
+      <app-empty-state title="Nenhum usuário encontrado" />
+    } @else {
+      <div class="table-scroll">
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">Usuário</th>
+              <th scope="col">Perfil</th>
+              <th scope="col">Status</th>
+              <th scope="col">Cadastro</th>
+              <th scope="col" class="actions-cell">Ações</th>
+            </tr>
+          </thead>
+          <tbody>
+            @for (user of users(); track user.id) {
+              <tr appUserRow [user]="user" [isSelf]="user.id === auth.user()?.id"></tr>
+            }
+          </tbody>
+        </table>
+      </div>
+
+      @if (meta(); as meta) {
+        @if (meta.totalPages > 1) {
+          <footer class="footer">
+            <span>
+              Página <strong>{{ meta.page }}</strong> de <strong>{{ meta.totalPages }}</strong>
+            </span>
+            <app-pagination
+              [page]="meta.page"
+              [pageCount]="meta.totalPages"
+              (pageChange)="page.set($event)"
+            />
+          </footer>
+        }
+      }
+    }
+  </app-panel>
+}

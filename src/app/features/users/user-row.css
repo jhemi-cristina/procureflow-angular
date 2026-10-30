@@ -1,0 +1,104 @@
+td {
+  padding: 13px 18px;
+  font-size: 12px;
+  border-bottom: 1px solid var(--border-soft);
+}
+
+:host(:last-child) td {
+  border-bottom: 0;
+}
+
+:host(.inactive-row) td {
+  opacity: 0.65;
+}
+
+.identity {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.identity > span:last-child {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.identity strong {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 12px;
+}
+
+.identity small {
+  color: var(--muted);
+  font-size: 11px;
+}
+
+.self-tag {
+  padding: 1px 6px;
+  color: var(--primary-text);
+  font-size: 10px;
+  font-style: normal;
+  font-weight: 700;
+  background: var(--primary-soft);
+  border-radius: 5px;
+}
+
+.role-select {
+  min-width: 160px;
+  height: 34px;
+  padding: 0 10px;
+  font-size: 12px;
+  font-weight: 600;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+}
+
+.role-select:hover:not(:disabled) {
+  border-color: var(--primary-border);
+}
+
+.role-select:disabled {
+  color: var(--muted);
+  background: var(--surface-muted);
+  cursor: not-allowed;
+}
+
+.status {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 9px;
+  font-size: 11px;
+  font-weight: 600;
+  border-radius: 7px;
+}
+
+.status-dot {
+  width: 6px;
+  height: 6px;
+  background: currentColor;
+  border-radius: 50%;
+}
+
+.active {
+  color: var(--success);
+  background: var(--success-soft);
+}
+
+.inactive {
+  color: var(--muted);
+  background: var(--border-soft);
+}
+
+.muted {
+  color: var(--muted);
+}
+
+.actions-cell {
+  text-align: right;
+}

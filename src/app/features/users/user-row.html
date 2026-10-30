@@ -1,0 +1,50 @@
+<td>
+  <span class="identity">
+    <app-avatar [name]="user().name" size="sm" />
+    <span>
+      <strong>
+        {{ user().name }}
+        @if (isSelf()) {
+          <em class="self-tag">Você</em>
+        }
+      </strong>
+      <small>{{ user().email }}</small>
+    </span>
+  </span>
+</td>
+<td>
+  <select
+    class="role-select"
+    [disabled]="isSelf() || updatingRole()"
+    [attr.aria-label]="'Perfil de ' + user().name"
+    [attr.title]="isSelf() ? 'Você não pode alterar o próprio perfil.' : null"
+    (change)="changeRole($event)"
+  >
+    @for (role of roles; track role) {
+      <option [value]="role" [selected]="role === user().role">{{ roleLabels[role] }}</option>
+    }
+  </select>
+</td>
+<td>
+  <span class="status" [class.active]="user().isActive" [class.inactive]="!user().isActive">
+    <span class="status-dot" aria-hidden="true"></span>
+    {{ user().isActive ? 'Ativo' : 'Inativo' }}
+  </span>
+</td>
+<td class="muted">{{ user().createdAt | shortDate }}</td>
+<td class="actions-cell">
+  @if (!isSelf()) {
+    <button
+      appButton
+      size="sm"
+      [variant]="user().isActive ? 'danger' : 'success'"
+      [loading]="togglingActive()"
+      (click)="toggleActive()"
+    >
+      @if (!togglingActive()) {
+        <app-icon [name]="user().isActive ? 'user-x' : 'user-check'" [size]="14" />
+      }
+      {{ user().isActive ? 'Desativar' : 'Reativar' }}
+    </button>
+  }
+</td>
