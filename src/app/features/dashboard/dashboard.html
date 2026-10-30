@@ -1,0 +1,60 @@
+<app-page-header
+  [eyebrow]="eyebrow"
+  [title]="title()"
+  [description]="
+    isApprover()
+      ? 'Aqui está o resumo das solicitações de compra de toda a equipe.'
+      : 'Aqui está o resumo das suas solicitações de compra.'
+  "
+>
+  <button appButton (click)="dialogs.openCreate()">
+    <app-icon name="plus" [size]="18" [strokeWidth]="2.4" />
+    Nova solicitação
+  </button>
+</app-page-header>
+
+@if (query().isPending()) {
+  <app-panel><app-loading-state label="Carregando painel..." /></app-panel>
+} @else if (query().isError()) {
+  <app-panel>
+    <app-error-state [message]="errorMessage()" (retry)="query().refetch()" />
+  </app-panel>
+} @else {
+  <section class="metrics-grid" aria-label="Indicadores">
+    <app-metric-card
+      title="Total de solicitações"
+      icon="clipboard-list"
+      tone="violet"
+      [value]="'' + stats().total"
+      [footnote]="totalFootnote()"
+    />
+    <app-metric-card
+      title="Aguardando aprovação"
+      icon="clock-3"
+      tone="amber"
+      footnote="Enviadas e sem decisão"
+      [value]="'' + stats().pending"
+    />
+    <app-metric-card
+      title="Aprovadas"
+      icon="circle-check"
+      tone="green"
+      [value]="'' + stats().approved"
+      [footnote]="'Taxa de aprovação de ' + stats().approvalRate + '%'"
+    />
+    <app-metric-card
+      title="Valor solicitado"
+      icon="wallet"
+      tone="blue"
+      [value]="totalAmount()"
+      [footnote]="approvedAmount()"
+    />
+  </section>
+
+  <section class="overview-grid">
+    <app-requests-chart [data]="stats().monthly" />
+    <app-pending-approvals [requests]="myRequests()" />
+  </section>
+
+  <app-recent-requests [requests]="myRequests()" />
+}

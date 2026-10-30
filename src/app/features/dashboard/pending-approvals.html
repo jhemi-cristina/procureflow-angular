@@ -1,0 +1,44 @@
+<app-panel class="approvals-panel">
+  <app-panel-header
+    title="Aguardando aprovação"
+    [description]="
+      isApprover()
+        ? 'Solicitações de toda a equipe que precisam da sua decisão.'
+        : 'Suas solicitações enviadas e aguardando o aprovador.'
+    "
+  >
+    <span class="pending-count">{{ pending().length }}</span>
+  </app-panel-header>
+
+  @if (isApprover() && queue.isPending()) {
+    <app-loading-state label="Carregando fila..." />
+  } @else if (isApprover() && queue.isError()) {
+    <app-error-state [message]="errorMessage()" (retry)="queue.refetch()" />
+  } @else if (pending().length === 0) {
+    <app-empty-state
+      icon="clock-3"
+      title="Tudo em dia"
+      description="Nenhuma solicitação pendente no momento."
+    />
+  } @else {
+    <ul class="approval-list">
+      @for (request of visible(); track request.id) {
+        <li>
+          <button type="button" (click)="dialogs.openDetails(request)">
+            <app-avatar [name]="request.requester.name" />
+            <span class="approval-copy">
+              <strong>{{ request.title }}</strong>
+              <span>{{ request.requester.name }} · {{ request.createdAt | shortDate }}</span>
+            </span>
+            <strong class="approval-amount">{{ request.estimatedAmount | brl }}</strong>
+          </button>
+        </li>
+      }
+    </ul>
+  }
+
+  <a class="text-link" [routerLink]="isApprover() ? '/aprovacoes' : '/solicitacoes'">
+    {{ isApprover() ? 'Revisar aprovações' : 'Ver todas as solicitações' }}
+    <app-icon name="arrow-up-right" [size]="16" />
+  </a>
+</app-panel>

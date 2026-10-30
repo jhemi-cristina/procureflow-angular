@@ -1,0 +1,95 @@
+:host {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+}
+
+.approvals-panel {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+}
+
+.pending-count {
+  display: grid;
+  min-width: 27px;
+  height: 27px;
+  place-items: center;
+  padding: 0 7px;
+  color: #d97706;
+  font-size: 12px;
+  font-weight: 700;
+  background: #fff4df;
+  border-radius: var(--radius-sm);
+}
+
+.approval-list {
+  flex: 1;
+  margin: 12px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.approval-list li + li {
+  border-top: 1px solid var(--border-soft);
+}
+
+.approval-list button {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  gap: 10px;
+  padding: 13px 4px;
+  text-align: left;
+  background: transparent;
+  border: 0;
+  border-radius: var(--radius-sm);
+}
+
+.approval-list button:hover {
+  background: var(--primary-softer);
+}
+
+.approval-copy {
+  display: flex;
+  min-width: 0;
+  flex: 1;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.approval-copy strong,
+.approval-copy span {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.approval-copy strong {
+  font-size: 12px;
+}
+
+.approval-copy span {
+  color: #919bad;
+  font-size: 11px;
+}
+
+.approval-amount {
+  flex-shrink: 0;
+  font-size: 12px;
+}
+
+.text-link {
+  display: inline-flex;
+  align-self: flex-start;
+  align-items: center;
+  gap: 7px;
+  margin-top: 14px;
+  color: var(--primary);
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.text-link:hover {
+  color: #3429c5;
+}
