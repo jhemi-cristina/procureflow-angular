@@ -1,0 +1,102 @@
+:root {
+  --background: #f7f8fa;
+  --foreground: #172033;
+  --foreground-soft: #465168;
+  --muted: #788397;
+  --muted-light: #9aa3b3;
+  --border: #e8ebf1;
+  --border-soft: #f0f2f6;
+  --surface: #ffffff;
+  --surface-muted: #fafbfc;
+
+  --primary: #5549e8;
+  --primary-hover: #4438d8;
+  --primary-soft: #f0efff;
+  --primary-softer: #f8f7ff;
+  --primary-border: #e2e0ff;
+  --primary-text: #5147dc;
+
+  --success: #15966a;
+  --success-soft: #e8f8f0;
+  --warning: #b77917;
+  --warning-soft: #fff6e5;
+  --danger: #cf4b5a;
+  --danger-soft: #fff0f1;
+  --info: #3285dc;
+  --info-soft: #e7f3ff;
+
+  --radius-sm: 8px;
+  --radius-md: 10px;
+  --radius-lg: 14px;
+  --shadow-sm: 0 2px 8px #17203308;
+  --shadow-lg: 0 20px 50px #1720331a;
+
+  --font-body: 'DM Sans', system-ui, sans-serif;
+  --font-heading: 'Manrope', system-ui, sans-serif;
+
+  --sidebar-width: 258px;
+}
+
+@media (max-width: 1400px) {
+  :root {
+    --sidebar-width: 238px;
+  }
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  min-height: 100%;
+  margin: 0;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-body);
+  font-size: 14px;
+  -webkit-font-smoothing: antialiased;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+  color: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+button:disabled {
+  cursor: not-allowed;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+}
+
+::selection {
+  background: #dedcff;
+  color: #312e81;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
