@@ -1,0 +1,27 @@
+@if (menuOpen()) {
+  <button type="button" class="overlay" aria-label="Fechar menu" (click)="closeMenu()"></button>
+}
+
+<aside appSidebar [open]="menuOpen()" (navigate)="closeMenu()"></aside>
+
+<div class="main">
+  <header appTopbar (openMenu)="menuOpen.set(true)"></header>
+  <main class="content"><router-outlet /></main>
+  <footer class="footer">
+    <span>© 2026 ProcureFlow. Todos os direitos reservados.</span>
+    <span><span class="status-dot"></span> Integrado à ProcureFlow API</span>
+  </footer>
+</div>
+
+@let dialog = dialogs.current();
+@if (dialog && dialog.type === 'form') {
+  <app-request-form-dialog [request]="dialog.request" (closed)="dialogs.close()" />
+} @else if (dialog && dialog.type === 'details') {
+  <app-request-details-dialog [request]="dialog.request" (closed)="dialogs.close()" />
+} @else if (dialog && dialog.type === 'decision') {
+  <app-decision-dialog
+    [request]="dialog.request"
+    [decision]="dialog.decision"
+    (closed)="dialogs.close()"
+  />
+}

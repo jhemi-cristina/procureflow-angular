@@ -1,0 +1,49 @@
+<div class="brand">
+  <span class="brand-mark">
+    <app-icon name="shopping-cart" [size]="22" [strokeWidth]="2.5" />
+  </span>
+  <span class="brand-copy">
+    <span class="brand-name">procureflow</span>
+    <span class="brand-subtitle">GESTÃO INTELIGENTE</span>
+  </span>
+  <button type="button" class="close" aria-label="Fechar menu" (click)="navigate.emit()">
+    <app-icon name="x" [size]="19" />
+  </button>
+</div>
+
+<p class="section-label">MENU PRINCIPAL</p>
+<nav class="nav" aria-label="Navegação principal">
+  @for (item of items(); track item.href) {
+    <a
+      class="nav-item"
+      [routerLink]="item.href"
+      [class.active]="activeHref() === item.href"
+      [attr.aria-current]="activeHref() === item.href ? 'page' : null"
+      (click)="navigate.emit()"
+    >
+      <app-icon [name]="item.icon" [size]="19" [strokeWidth]="1.8" />
+      <span>{{ item.label }}</span>
+    </a>
+  }
+</nav>
+
+<div class="spacer"></div>
+
+@if (auth.user(); as user) {
+  <div class="profile">
+    <app-avatar [name]="user.name" variant="solid" />
+    <div class="profile-copy">
+      <strong>{{ user.name }}</strong>
+      <span>{{ roleLabels[user.role] ?? user.role }}</span>
+    </div>
+    <button
+      type="button"
+      class="logout"
+      aria-label="Sair"
+      title="Sair"
+      (click)="auth.signOut()"
+    >
+      <app-icon name="log-out" [size]="17" />
+    </button>
+  </div>
+}
