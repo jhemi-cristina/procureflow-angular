@@ -1,59 +1,54 @@
-# ProcureflowAngular
+# ProcureFlow Angular
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 22.2.5.
+Versão em **Angular 22** do front-end do ProcureFlow, com o mesmo layout e as mesmas
+funcionalidades do [procureflow-web](../procureflow-web) (Next.js). Consome a
+[ProcureFlow API](../procureflow-api) (NestJS + PostgreSQL + JWT) nos mesmos endpoints.
 
-## Development server
+## Funcionalidades
 
-To start a local development server, run:
+- Login e cadastro com JWT, sessão no `sessionStorage` com expiração automática e logout em `401`
+- Visão geral com indicadores, gráfico mensal, fila pendente e solicitações recentes
+- Solicitações com busca, filtro por status e paginação; criar/editar rascunhos e enviar
+- Fila de aprovação com aprovar/rejeitar e justificativa (`admin` e `approver`)
+- Gestão de usuários (perfil e ativação) para `admin`
+- Layout responsivo com menu lateral no mobile
 
-```bash
-ng serve
+## Stack
+
+- Componentes standalone, signals (`input`, `model`, `computed`, `linkedSignal`) e change detection zoneless
+- `HttpClient` com um cache de consultas leve (`core/query`) no lugar do TanStack Query
+- CSS por componente com os mesmos design tokens globais do procureflow-web
+- Ícones Lucide inline (`shared/ui/icon.ts`), sem dependências extras
+
+## Estrutura
+
+```
+src/app/
+  core/        # api, auth (sessão, guards), cache de consultas, modelos, formatação
+  shared/      # componentes de UI (Button, Modal, TextField, Panel...) e pipes
+  layout/      # AppShell, Sidebar, Topbar
+  features/    # auth, dashboard, purchase-requests, users
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+## Como rodar
 
-## Code scaffolding
+1. Suba a API na porta `3000`.
+2. Rode o front:
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+   ```bash
+   npm install
+   npm start
+   ```
 
-```bash
-ng generate component component-name
-```
+3. Acesse [http://localhost:4200](http://localhost:4200).
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+Em desenvolvimento, o `ng serve` encaminha `/api` para `http://localhost:3000`
+(`proxy.conf.json`), então não é preciso alterar o `CORS_ORIGINS` da API. Em produção,
+sirva o front e a API na mesma origem ou ajuste `src/environments/environment.ts`
+para uma URL liberada no CORS.
 
-```bash
-ng generate --help
-```
-
-## Building
-
-To build the project run:
-
-```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+| Script          | Descrição                          |
+| --------------- | ---------------------------------- |
+| `npm start`     | Servidor de desenvolvimento (4200) |
+| `npm run build` | Build de produção                  |
+| `npm test`      | Testes unitários (Vitest)          |
